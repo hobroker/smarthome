@@ -9,10 +9,7 @@
 #include <ir_Kelvinator.h>
 #include <PubSubClient.h>
 #include "secrets.h"
-
-// WiFi
-const char *kSsid = SECRETS_WIFI_SSID;
-const char *kPassword = SECRETS_WIFI_PASSWORD;
+#include "wifi.h"
 
 // MQTT Broker
 const char *mqtt_broker = SECRETS_MQTT_BROKER;
@@ -84,22 +81,6 @@ void prepareAC() {
   ac.setXFan(false);
   ac.setIonFilter(false);
   ac.setLight(true);
-}
-
-void prepareWiFi() {
-  Serial.println("Connecting to WiFi");
-  WiFi.begin(kSsid, kPassword);
-
-  // Wait for connection
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("");
-  Serial.print("Connected to ");
-  Serial.println(kSsid);
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP().toString());
 }
 
 void prepareMQTT() {
